@@ -106,4 +106,40 @@ function selectAnswer(selectedIndex) {
         score++;
         scoreDisplay.textContent = score;
     } else {
-   
+        options[selectedIndex].classList.add('incorrect');
+        options[question.correctAnswer].classList.add('correct');
+    }
+    
+    nextButton.style.display = 'block';
+}
+
+
+function nextQuestion() {
+    currentQuestionIndex++;
+    
+    if (currentQuestionIndex < questions.length) {
+        showQuestion();
+    } else {
+        showResults();
+    }
+}
+
+
+function showResults() {
+    questionText.style.display = 'none';
+    optionsContainer.style.display = 'none';
+    nextButton.style.display = 'none';
+    resultContainer.style.display = 'block';
+    finalScore.textContent = score;
+}
+
+
+nextButton.addEventListener('click', nextQuestion);
+restartButton.addEventListener('click', () => {
+    questionText.style.display = 'block';
+    optionsContainer.style.display = 'block';
+    initQuiz();
+});
+
+
+initQuiz(); 
